@@ -17,8 +17,12 @@ MainWindow::MainWindow(QWidget *parent) :
     keyState[1]=false; // вниз
     keyState[2]=false; // вправо
     keyState[3]=false; // влево
-    // gittest
-    //gittest2
+
+    throttleUpKeyState = false;
+    throttleDownKeyState = false;
+    yawLeftKeyState = false;
+    yawRightKeyState = false;
+
 
     connected=false;
 
@@ -56,6 +60,8 @@ void MainWindow::update(){
     ui->label_down_left_blue->hide();
     ui->label_down_right_blue->hide();
 
+
+    // разбор клавиш-стрелок (тангаж и крен)
     if(keyState[0] && keyState[2] && connected){
         cubie->sendVar("up","1");
         cubie->sendVar("right","1");
@@ -93,6 +99,21 @@ void MainWindow::update(){
         ui->label_left_blue->show();
     }
 
+    // разбор клавиш тяги
+    if(throttleUpKeyState && !throttleDownKeyState ){
+        throttle_up();
+    } else if(throttleDownKeyState && !throttleUpKeyState){
+        throttle_down();
+    }
+
+    // разбор клавиш рыскания
+    if(yawLeftKeyState && !yawRightKeyState){
+        yaw_left();
+    } else if(yawRightKeyState && !yawLeftKeyState){
+        yaw_right();
+    }
+
+
 
     if(connected){
        // cubie->sendVar("testd","yuhhu");
@@ -122,19 +143,19 @@ void MainWindow::keyPressEvent(QKeyEvent *keyEvent)
     }
     else if(keyEvent->key()==Qt::Key_W)
     {
-        throttle_up();
+        throttleUpKeyState=true;
     }
     else if(keyEvent->key()==Qt::Key_S)
     {
-        throttle_down();
+        throttleDownKeyState=true;
     }
     else if(keyEvent->key()==Qt::Key_C)
     {
-        yaw_left();
+        yawLeftKeyState=true;
     }
     else if(keyEvent->key()==Qt::Key_V)
     {
-        yaw_right();
+        yawRightKeyState=true;
     }
 }
 
@@ -156,6 +177,22 @@ void MainWindow::keyReleaseEvent(QKeyEvent *keyEvent)
     else if(keyEvent->key()==Qt::Key_Left)
     {
         keyState[3]=false;
+    }
+    else if(keyEvent->key()==Qt::Key_W)
+    {
+        throttleUpKeyState=false;
+    }
+    else if(keyEvent->key()==Qt::Key_S)
+    {
+        throttleDownKeyState=false;
+    }
+    else if(keyEvent->key()==Qt::Key_C)
+    {
+        yawLeftKeyState=false;
+    }
+    else if(keyEvent->key()==Qt::Key_V)
+    {
+        yawRightKeyState=false;
     }
 }
 
@@ -196,10 +233,14 @@ void MainWindow::throttle_down(){
     ui->throttleSlider->setValue(new_value);
 }
 void MainWindow::yaw_left(){
-
+    int old= ui->yawSlider->value();
+    int new_val = old-ui->yaw_sesitivity_spinBox->value();
+    ui->yawSlider->setValue(new_val);
 }
 void MainWindow::yaw_right(){
-
+    int old= ui->yawSlider->value();
+    int new_val = old+ui->yaw_sesitivity_spinBox->value();
+    ui->yawSlider->setValue(new_val);
 }
 
 

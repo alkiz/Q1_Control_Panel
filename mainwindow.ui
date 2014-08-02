@@ -74,9 +74,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>40</y>
+      <y>30</y>
       <width>331</width>
-      <height>281</height>
+      <height>301</height>
      </rect>
     </property>
     <widget class="QLabel" name="label_6">
@@ -108,7 +108,7 @@
       <string>Запуск двигателей</string>
      </property>
     </widget>
-    <widget class="QSlider" name="horizontalSlider">
+    <widget class="QSlider" name="yawSlider">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -126,14 +126,17 @@
      <property name="autoFillBackground">
       <bool>false</bool>
      </property>
+     <property name="minimum">
+      <number>-127</number>
+     </property>
      <property name="maximum">
-      <number>100</number>
+      <number>127</number>
      </property>
      <property name="value">
-      <number>50</number>
+      <number>0</number>
      </property>
      <property name="sliderPosition">
-      <number>50</number>
+      <number>0</number>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -141,6 +144,198 @@
      <property name="invertedAppearance">
       <bool>false</bool>
      </property>
+    </widget>
+    <widget class="QLabel" name="label_8">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>160</y>
+       <width>91</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Чувствительность</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="yaw_sesitivity_spinBox">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>140</y>
+       <width>52</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>5</number>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="throttleBox">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>91</width>
+       <height>301</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox {
+   border: 1px solid gray;
+   border-radius: 3px;
+}
+</string>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <widget class="QProgressBar" name="progressBar">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>20</width>
+        <height>200</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>255</number>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+      <property name="textVisible">
+       <bool>false</bool>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="textDirection">
+       <enum>QProgressBar::BottomToTop</enum>
+      </property>
+      <property name="format">
+       <string>%p%</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>230</y>
+        <width>67</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Тяга</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_throttle_set">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>10</y>
+        <width>31</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="throttleSlider">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>30</y>
+        <width>19</width>
+        <height>200</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>255</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="tickInterval">
+       <number>1</number>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="throttle_sesitivity_spinBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>260</y>
+        <width>52</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="minimum">
+       <number>1</number>
+      </property>
+      <property name="maximum">
+       <number>5</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>31</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>0</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>280</y>
+        <width>91</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Чувствительность</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QGroupBox" name="blueGroupBox">
@@ -316,143 +511,6 @@
      </property>
      <property name="text">
       <string>Крен и тангаж</string>
-     </property>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="throttleBox">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>71</width>
-      <height>301</height>
-     </rect>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QGroupBox {
-   border: 1px solid gray;
-   border-radius: 3px;
-}
-</string>
-    </property>
-    <property name="title">
-     <string/>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-    <property name="checkable">
-     <bool>false</bool>
-    </property>
-    <widget class="QProgressBar" name="progressBar">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>30</y>
-       <width>20</width>
-       <height>200</height>
-      </rect>
-     </property>
-     <property name="maximum">
-      <number>255</number>
-     </property>
-     <property name="value">
-      <number>0</number>
-     </property>
-     <property name="textVisible">
-      <bool>false</bool>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="textDirection">
-      <enum>QProgressBar::BottomToTop</enum>
-     </property>
-     <property name="format">
-      <string>%p%</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_3">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>230</y>
-       <width>67</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Тяга</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_throttle_set">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>10</y>
-       <width>31</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
-     </property>
-    </widget>
-    <widget class="QSlider" name="throttleSlider">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>30</y>
-       <width>19</width>
-       <height>200</height>
-      </rect>
-     </property>
-     <property name="maximum">
-      <number>255</number>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="tickInterval">
-      <number>1</number>
-     </property>
-    </widget>
-    <widget class="QSpinBox" name="throttle_sesitivity_spinBox">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>260</y>
-       <width>52</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="focusPolicy">
-      <enum>Qt::NoFocus</enum>
-     </property>
-     <property name="minimum">
-      <number>1</number>
-     </property>
-     <property name="maximum">
-      <number>5</number>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_4">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>31</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>0</string>
      </property>
     </widget>
    </widget>

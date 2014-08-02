@@ -27,6 +27,10 @@ private slots:
 private:
     Ui::MainWindow *ui;
     bool keyState[4];
+    bool throttleUpKeyState;
+    bool throttleDownKeyState;
+    bool yawLeftKeyState;
+    bool yawRightKeyState;
     Cubie *cubie;
     int i;
     bool connected;
