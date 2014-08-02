@@ -42,6 +42,7 @@ private:
     void throttle_down();
     void yaw_left();
     void yaw_right();
+    void yaw_center();
 };
 
 #endif // MAINWINDOW_H

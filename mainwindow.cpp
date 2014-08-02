@@ -111,6 +111,10 @@ void MainWindow::update(){
         yaw_left();
     } else if(yawRightKeyState && !yawLeftKeyState){
         yaw_right();
+    } else if(yawRightKeyState && yawLeftKeyState){
+        // нажаты обе клавиши, ничего не делаем
+    }else {
+        yaw_center();
     }
 
 
@@ -240,6 +244,25 @@ void MainWindow::yaw_left(){
 void MainWindow::yaw_right(){
     int old= ui->yawSlider->value();
     int new_val = old+ui->yaw_sesitivity_spinBox->value();
+    ui->yawSlider->setValue(new_val);
+}
+
+void MainWindow::yaw_center(){
+    int old= ui->yawSlider->value();
+    int new_val=0;
+    if(old>0){
+        if (old >= ui->yaw_sesitivity_spinBox->value()){
+            new_val = old-ui->yaw_sesitivity_spinBox->value();
+        }
+    }
+    else if(old<0){
+        if ((0-old) >= ui->yaw_sesitivity_spinBox->value()){
+            new_val = old+ui->yaw_sesitivity_spinBox->value();
+        }
+    }
+    //char test[3];
+    //sprintf(test,"%d", new_val);
+    //ui->statusBar->showMessage(test);
     ui->yawSlider->setValue(new_val);
 }
 
