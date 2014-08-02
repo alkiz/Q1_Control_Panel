@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     keyState[2]=false; // вправо
     keyState[3]=false; // влево
     // gittest
+    //gittest2
 
     connected=false;
 
