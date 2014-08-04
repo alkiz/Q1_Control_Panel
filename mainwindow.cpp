@@ -41,7 +41,6 @@ MainWindow::MainWindow(QWidget *parent) :
     timer->start(20);
 
 
-
 }
 
 MainWindow::~MainWindow()
@@ -62,59 +61,100 @@ void MainWindow::update(){
 
 
     // разбор клавиш-стрелок (тангаж и крен)
-    if(keyState[0] && keyState[2] && connected){
-        cubie->sendVar("up","1");
-        cubie->sendVar("right","1");
+    if(keyState[0] && keyState[2]){
+        if (connected){
+            cubie->sendVar("up","1");
+            cubie->sendVar("right","1");
+        }
         ui->label_up_right_blue->show();
     }
-    else if(keyState[0] && keyState[3] && connected) {
-        cubie->sendVar("up","1");
-        cubie->sendVar("left","1");
+    else if(keyState[0] && keyState[3]) {
+        if (connected){
+            cubie->sendVar("up","1");
+            cubie->sendVar("left","1");
+        }
         ui->label_up_left_blue->show();
     }
-    else if(keyState[1] && keyState[2] && connected) {
-        cubie->sendVar("down","1");
-        cubie->sendVar("right","1");
+    else if(keyState[1] && keyState[2]) {
+        if (connected) {
+            cubie->sendVar("down","1");
+            cubie->sendVar("right","1");
+        }
         ui->label_down_right_blue->show();
     }
-    else if(keyState[1] && keyState[3] && connected) {
-        cubie->sendVar("down","1");
-        cubie->sendVar("left","1");
+    else if(keyState[1] && keyState[3]) {
+        if (connected){
+            cubie->sendVar("down","1");
+            cubie->sendVar("left","1");
+        }
         ui->label_down_left_blue->show();
     }
-    else if(keyState[0] && connected) {
-        cubie->sendVar("up","1");
+    else if(keyState[0]) {
+        if (connected){
+            cubie->sendVar("up","1");
+        }
         ui->label_up_blue->show();
     }
-    else if(keyState[1] && connected) {
-        cubie->sendVar("down","1");
+    else if(keyState[1]) {
+        if (connected){
+            cubie->sendVar("down","1");
+        }
         ui->label_down_blue->show();
     }
-    else if(keyState[2] && connected) {
-        cubie->sendVar("right","1");
+    else if(keyState[2]) {
+        if (connected){
+            cubie->sendVar("right","1");
+        }
         ui->label_right_blue->show();
     }
-    else if(keyState[3] && connected) {
-        cubie->sendVar("left","1");
+    else if(keyState[3]) {
+        if (connected){
+            cubie->sendVar("left","1");
+        }
         ui->label_left_blue->show();
     }
 
     // разбор клавиш тяги
     if(throttleUpKeyState && !throttleDownKeyState ){
         throttle_up();
+        if (connected){
+            char throttle_text[4];
+            sprintf(throttle_text,"%d",ui->throttleSlider->value());
+            cubie->sendVar("throttle",throttle_text);
+        }
     } else if(throttleDownKeyState && !throttleUpKeyState){
         throttle_down();
+        if (connected){
+            char throttle_text[4];
+            sprintf(throttle_text,"%d",ui->throttleSlider->value());
+            cubie->sendVar("throttle",throttle_text);
+        }
+
     }
 
     // разбор клавиш рыскания
+    char yaw_text[4];
     if(yawLeftKeyState && !yawRightKeyState){
+
         yaw_left();
+        if (connected){
+            sprintf(yaw_text,"%d",ui->yawSlider->value());
+            cubie->sendVar("yaw",yaw_text);
+        }
     } else if(yawRightKeyState && !yawLeftKeyState){
         yaw_right();
+        if (connected){
+            sprintf(yaw_text,"%d",ui->yawSlider->value());
+            cubie->sendVar("yaw",yaw_text);
+        }
     } else if(yawRightKeyState && yawLeftKeyState){
         // нажаты обе клавиши, ничего не делаем
-    }else {
+    }else if(ui->yawSlider->value()!=0){
         yaw_center();
+        if (connected){
+            sprintf(yaw_text,"%d",ui->yawSlider->value());
+            cubie->sendVar("yaw",yaw_text);
+        }
     }
 
 
@@ -201,28 +241,27 @@ void MainWindow::keyReleaseEvent(QKeyEvent *keyEvent)
 }
 
 
+
 void MainWindow::on_action_connect_triggered()
 {
-    connectDialog connectDialog;
 
-    if (connectDialog.exec() == QDialog::Accepted) {
-        this->cubie = new Cubie(connectDialog.getIp(), 26000);
-        this->cubie->connect();
-        if(cubie->isConnected()){
-            QMessageBox::information(0, "Information", "Соединено c " + connectDialog.getIp());
-            ui->statusBar->showMessage("Соединение установлено");
-            ui->label_2->setText("Соединено c " + connectDialog.getIp());
-            ui->action_connect->setText("Разъеденить");
-            this->showFullScreen();
-            connected=true;
-        } else {
-            QMessageBox::information(0, "Information", "Соединение не установлено с " + connectDialog.getIp());
-        }
-
-
+    if (cDialog.exec() == QDialog::Accepted) {
+        this->cubie = new Cubie(cDialog.getIp(), 26000, 27000);
+        this->cubie->connectToCubie();
+        qDebug() << "test";
+        connect(cubie, SIGNAL(connectionEstablished()), this, SLOT(connectionEstablished()));
     }
 
     //Cubie *cubie = new Cubie("91.123.151.230", 26000);
+}
+void MainWindow::connectionEstablished() {
+    QMessageBox::information(0, "Information", "Соединено c " + cDialog.getIp());
+    ui->statusBar->showMessage("Соединение установлено");
+    ui->label_2->setText("Соединено c " + cDialog.getIp());
+    ui->action_connect->setText("Разъеденить");
+    this->showFullScreen();
+    connected=true;
+    cubie->sendTest();
 }
 
 void MainWindow::throttle_up(){

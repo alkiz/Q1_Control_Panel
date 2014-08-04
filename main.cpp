@@ -8,8 +8,8 @@ int main(int argc, char *argv[])
     QApplication::setStyle("Fusion");
     MainWindow w;
     w.show();
-    foreach (QString it, QStyleFactory::keys()) {
-            qDebug() << it << "\n";
-        }
+    //foreach (QString it, QStyleFactory::keys()) {
+    //        qDebug() << it << "\n";
+    //   }
     return a.exec();
 }

@@ -2,19 +2,33 @@
 #include <QHostAddress>
 #include "cubie.h"
 
-void Cubie::connect(){
-    connection_status = this->udpsocket->bind(QHostAddress(this->addr),this->port);
-    connection_status=true;
+void Cubie::connectToCubie(){
+    this->udpsocket->connectToHost(QHostAddress(this->addr),this->port);
+    //udpsocket->waitForConnected(5000);
+    tcpsocket->connectToHost(QHostAddress(this->addr),this->tcpport);
+    //tcpsocket->waitForConnected(5000);
 }
 
 void Cubie::sendTest(){
     this->udpsocket->writeDatagram("test=3\n", QHostAddress(this->addr), this->port);
+    this->tcpsocket->write("tcpconnected=1\n");
 }
 void Cubie::sendVar(char* key, char* value){
     char data[80];
     sprintf (data, "%s=%s\n", key, value);
     this->udpsocket->writeDatagram(data, QHostAddress(this->addr), this->port );
+}QString Cubie::getVar(char* key){
+
 }
 bool Cubie::isConnected(){
-    return this->connection_status;
+    return connection_status;
+}
+void Cubie::connected(){
+    if (tcpsocket->state()==QAbstractSocket::ConnectedState){
+        connection_status=true;
+        emit connectionEstablished();
+    }
+}
+void Cubie::disconnectFromCubie(){
+
 }

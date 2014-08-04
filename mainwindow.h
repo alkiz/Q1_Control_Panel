@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "cubie.h"
+#include "connectdialog.h"
 namespace Ui {
 class MainWindow;
 }
@@ -23,7 +24,8 @@ private slots:
     void update();
 
     void on_throttleSlider_valueChanged(int value);
-
+public slots:
+    void connectionEstablished();
 private:
     Ui::MainWindow *ui;
     bool keyState[4];
@@ -34,6 +36,7 @@ private:
     Cubie *cubie;
     int i;
     bool connected;
+    connectDialog cDialog;
 
     //Функции
     void keyPressEvent(QKeyEvent*);
