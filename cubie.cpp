@@ -1,5 +1,6 @@
 #include <QUdpSocket>
 #include <QHostAddress>
+#include <QString>
 #include "cubie.h"
 
 void Cubie::connectToCubie(){
@@ -13,11 +14,12 @@ void Cubie::sendTest(){
     this->udpsocket->writeDatagram("test=3\n", QHostAddress(this->addr), this->port);
     this->tcpsocket->write("tcpconnected=1\n");
 }
-void Cubie::sendVar(char* key, char* value){
-    char data[80];
-    sprintf (data, "%s=%s\n", key, value);
-    this->udpsocket->writeDatagram(data, QHostAddress(this->addr), this->port );
-}QString Cubie::getVar(char* key){
+void Cubie::sendVar(const QString &key, const QString &value){
+    QString data= QString("%1=%2\n").arg(key).arg(value);
+    //QString::sprintf (data, "%s=%s\n", &key, &value);
+    this->udpsocket->writeDatagram(data.toLatin1(), QHostAddress(this->addr), this->port );
+}
+QString Cubie::getVar(const QString &key){
 
 }
 bool Cubie::isConnected(){
@@ -30,5 +32,7 @@ void Cubie::connected(){
     }
 }
 void Cubie::disconnectFromCubie(){
-
+    udpsocket->disconnectFromHost();
+    tcpsocket->disconnectFromHost();
+    connection_status=false;
 }

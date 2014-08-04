@@ -63,8 +63,8 @@ void MainWindow::update(){
     // разбор клавиш-стрелок (тангаж и крен)
     if(keyState[0] && keyState[2]){
         if (connected){
-            cubie->sendVar("up","1");
-            cubie->sendVar("right","1");
+            cubie->sendVar(QString("up"),QString("1"));
+            cubie->sendVar(QString("right"),QString("1"));
         }
         ui->label_up_right_blue->show();
     }
@@ -259,7 +259,7 @@ void MainWindow::connectionEstablished() {
     ui->statusBar->showMessage("Соединение установлено");
     ui->label_2->setText("Соединено c " + cDialog.getIp());
     ui->action_connect->setText("Разъеденить");
-    this->showFullScreen();
+    //this->showFullScreen();
     connected=true;
     cubie->sendTest();
 }

@@ -21,8 +21,8 @@ public:
     void connectToCubie();
     void disconnectFromCubie();
     void sendTest();
-    void sendVar(char* key, char* value);
-    QString getVar(char* key);
+    void sendVar(const QString &key, const QString &value);
+    QString getVar(const QString &key);
     bool isConnected();
 
 private:
