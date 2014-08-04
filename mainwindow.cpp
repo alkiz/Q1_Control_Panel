@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->label_down_left_blue->hide();
     ui->label_down_right_blue->hide();
 
-    this->i = 1;
+    this->sendedPackets = 1;
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
     timer->start(20);
@@ -63,8 +63,8 @@ void MainWindow::update(){
     // разбор клавиш-стрелок (тангаж и крен)
     if(keyState[0] && keyState[2]){
         if (connected){
-            cubie->sendVar(QString("up"),QString("1"));
-            cubie->sendVar(QString("right"),QString("1"));
+            cubie->sendVar("up","1");
+            cubie->sendVar("right","1");
         }
         ui->label_up_right_blue->show();
     }
@@ -161,8 +161,8 @@ void MainWindow::update(){
 
     if(connected){
        // cubie->sendVar("testd","yuhhu");
-        ui->statusBar->showMessage("Отправлено пакетов: " + QString::number(i));
-        i++;
+        ui->statusBar->showMessage("Отправлено пакетов: " + QString::number(sendedPackets));
+        //i++;
     }
 }
 
@@ -244,12 +244,21 @@ void MainWindow::keyReleaseEvent(QKeyEvent *keyEvent)
 
 void MainWindow::on_action_connect_triggered()
 {
-
-    if (cDialog.exec() == QDialog::Accepted) {
-        this->cubie = new Cubie(cDialog.getIp(), 26000, 27000);
-        this->cubie->connectToCubie();
-        qDebug() << "test";
-        connect(cubie, SIGNAL(connectionEstablished()), this, SLOT(connectionEstablished()));
+    if(connected){
+        cubie->disconnectFromCubie();
+        QMessageBox::information(0, "Information", "Отключено от " + cDialog.getIp());
+        ui->statusBar->showMessage("Соединение разорвано");
+        ui->label_2->setText("Нет соединения");
+        ui->action_connect->setText("Подключится к ...");
+        connected=false;
+    } else{
+        if (cDialog.exec() == QDialog::Accepted) {
+            this->cubie = new Cubie(cDialog.getIp(), 26000, 27000);
+            this->cubie->connectToCubie();
+            connect(cubie, SIGNAL(packetSent()), this, SLOT(packetSent()));
+            qDebug() << "test";
+            connect(cubie, SIGNAL(connectionEstablished()), this, SLOT(connectionEstablished()));
+        }
     }
 
     //Cubie *cubie = new Cubie("91.123.151.230", 26000);
@@ -262,6 +271,10 @@ void MainWindow::connectionEstablished() {
     //this->showFullScreen();
     connected=true;
     cubie->sendTest();
+}
+
+void MainWindow::packetSent() {
+    sendedPackets++;
 }
 
 void MainWindow::throttle_up(){

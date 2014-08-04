@@ -551,7 +551,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Соединить</string>
+    <string>Подключится к ...</string>
    </property>
   </action>
  </widget>

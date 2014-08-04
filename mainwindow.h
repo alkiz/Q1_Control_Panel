@@ -26,6 +26,7 @@ private slots:
     void on_throttleSlider_valueChanged(int value);
 public slots:
     void connectionEstablished();
+    void packetSent();
 private:
     Ui::MainWindow *ui;
     bool keyState[4];
@@ -34,7 +35,7 @@ private:
     bool yawLeftKeyState;
     bool yawRightKeyState;
     Cubie *cubie;
-    int i;
+    int sendedPackets;
     bool connected;
     connectDialog cDialog;
 

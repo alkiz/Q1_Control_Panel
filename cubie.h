@@ -36,6 +36,7 @@ public slots:
     void connected();
 signals:
     void connectionEstablished();
+    void packetSent();
 
 };
 #endif // CLIENT_H
