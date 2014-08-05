@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "cubie.h"
 #include "connectdialog.h"
+#include "keysdialog.h"
 namespace Ui {
 class MainWindow;
 }
@@ -24,6 +25,8 @@ private slots:
     void update();
 
     void on_throttleSlider_valueChanged(int value);
+    void on_action_keys_triggered();
+
 public slots:
     void connectionEstablished();
     void packetSent();
@@ -38,6 +41,7 @@ private:
     int sendedPackets;
     bool connected;
     connectDialog cDialog;
+    keysDialog kDialog;
 
     //Функции
     void keyPressEvent(QKeyEvent*);

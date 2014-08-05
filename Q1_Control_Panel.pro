@@ -15,14 +15,17 @@ TEMPLATE = app
 SOURCES += main.cpp\
 	mainwindow.cpp \
     cubie.cpp \
-    connectdialog.cpp
+    connectdialog.cpp \
+    keysdialog.cpp
 
 HEADERS  += mainwindow.h \
     cubie.h \
-    connectdialog.h
+    connectdialog.h \
+    keysdialog.h
 
 FORMS    += mainwindow.ui \
-    connectdialog.ui
+    connectdialog.ui \
+    keysdialog.ui
 
 RESOURCES += \
     resources.qrc

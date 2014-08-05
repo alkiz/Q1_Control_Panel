@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Q1 Control Panel</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QGroupBox{
@@ -535,7 +535,14 @@
     <addaction name="action_connect"/>
     <addaction name="action_3"/>
    </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Управление</string>
+    </property>
+    <addaction name="action_keys"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_3">
@@ -552,6 +559,11 @@
    </property>
    <property name="text">
     <string>Подключится к ...</string>
+   </property>
+  </action>
+  <action name="action_keys">
+   <property name="text">
+    <string>Назначение клавиш</string>
    </property>
   </action>
  </widget>
@@ -571,8 +583,8 @@
      <y>-1</y>
     </hint>
     <hint type="destinationlabel">
-     <x>171</x>
-     <y>200</y>
+     <x>371</x>
+     <y>244</y>
     </hint>
    </hints>
   </connection>

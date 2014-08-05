@@ -326,3 +326,8 @@ void MainWindow::on_throttleSlider_valueChanged(int value)
     QString valText(text);
     ui->label_throttle_set->setText(valText);
 }
+
+void MainWindow::on_action_keys_triggered()
+{
+    kDialog.exec();
+}
