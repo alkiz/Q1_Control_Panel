@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>219</width>
+    <width>457</width>
     <height>172</height>
    </rect>
   </property>
@@ -55,7 +55,39 @@
     <string>000.000.000.000;_</string>
    </property>
    <property name="text">
-    <string>91.123.151.230</string>
+    <string>192.168.240.1</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="port_Edit">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>50</y>
+     <width>81</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="inputMask">
+    <string/>
+   </property>
+   <property name="text">
+    <string>27000</string>
+   </property>
+   <property name="clearButtonEnabled">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>10</y>
+     <width>51</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>  Порт</string>
    </property>
   </widget>
  </widget>

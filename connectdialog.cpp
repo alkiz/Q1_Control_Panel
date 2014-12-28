@@ -16,3 +16,7 @@ connectDialog::~connectDialog()
 QString connectDialog::getIp(){
     return ui->lineEdit->text();
 }
+
+int connectDialog::getPort(){
+    return ui->port_Edit->text().toInt();
+}

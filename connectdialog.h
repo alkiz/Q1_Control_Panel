@@ -15,6 +15,7 @@ public:
     explicit connectDialog(QWidget *parent = 0);
     ~connectDialog();
     QString getIp();
+    int getPort();
 private:
     Ui::connectDialog *ui;
 };

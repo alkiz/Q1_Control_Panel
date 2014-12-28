@@ -11,13 +11,14 @@ void Cubie::connectToCubie(){
 }
 
 void Cubie::sendTest(){
-    this->udpsocket->writeDatagram("test=3\n", QHostAddress(this->addr), this->port);
+    //this->udpsocket->writeDatagram("test=3\n", QHostAddress(this->addr), this->port);
     this->tcpsocket->write("tcpconnected=1\n");
 }
 void Cubie::sendVar(const QString &key, const QString &value){
     QString data= QString("%1=%2\n").arg(key).arg(value);
     //QString::sprintf (data, "%s=%s\n", &key, &value);
-    this->udpsocket->writeDatagram(data.toLatin1(), QHostAddress(this->addr), this->port );
+    //this->udpsocket->writeDatagram(data.toLatin1(), QHostAddress(this->addr), this->port );
+    this->tcpsocket->write(data.toLatin1());
     emit packetSent();
 }
 QString Cubie::getVar(const QString &key){

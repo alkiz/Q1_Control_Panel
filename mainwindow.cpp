@@ -60,6 +60,8 @@ void MainWindow::update(){
     ui->label_down_right_blue->hide();
 
 
+
+
     // разбор клавиш-стрелок (тангаж и крен)
     if(keyState[0] && keyState[2]){
         if (connected){
@@ -113,7 +115,6 @@ void MainWindow::update(){
         }
         ui->label_left_blue->show();
     }
-
     // разбор клавиш тяги
     if(throttleUpKeyState && !throttleDownKeyState ){
         throttle_up();
@@ -131,7 +132,6 @@ void MainWindow::update(){
         }
 
     }
-
     // разбор клавиш рыскания
     char yaw_text[4];
     if(yawLeftKeyState && !yawRightKeyState){
@@ -246,14 +246,14 @@ void MainWindow::on_action_connect_triggered()
 {
     if(connected){
         cubie->disconnectFromCubie();
-        QMessageBox::information(0, "Information", "Отключено от " + cDialog.getIp());
+        QMessageBox::information(0, "Information", "Отключено от " + cDialog.getIp() + ":" + QString::number(cDialog.getPort()));
         ui->statusBar->showMessage("Соединение разорвано");
         ui->label_2->setText("Нет соединения");
         ui->action_connect->setText("Подключится к ...");
         connected=false;
     } else{
         if (cDialog.exec() == QDialog::Accepted) {
-            this->cubie = new Cubie(cDialog.getIp(), 26000, 27000);
+            this->cubie = new Cubie(cDialog.getIp(), 26000, cDialog.getPort());
             this->cubie->connectToCubie();
             connect(cubie, SIGNAL(packetSent()), this, SLOT(packetSent()));
             qDebug() << "test";
@@ -264,9 +264,9 @@ void MainWindow::on_action_connect_triggered()
     //Cubie *cubie = new Cubie("91.123.151.230", 26000);
 }
 void MainWindow::connectionEstablished() {
-    QMessageBox::information(0, "Information", "Соединено c " + cDialog.getIp());
+    QMessageBox::information(0, "Information", "Соединено c " + cDialog.getIp() + ":" + QString::number(cDialog.getPort()));
     ui->statusBar->showMessage("Соединение установлено");
-    ui->label_2->setText("Соединено c " + cDialog.getIp());
+    ui->label_2->setText("Соединено c " + cDialog.getIp() + ":" + QString::number(cDialog.getPort()));
     ui->action_connect->setText("Разъеденить");
     //this->showFullScreen();
     connected=true;
@@ -330,4 +330,33 @@ void MainWindow::on_throttleSlider_valueChanged(int value)
 void MainWindow::on_action_keys_triggered()
 {
     kDialog.exec();
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+
+}
+
+void MainWindow::on_P_SpinBox_valueChanged(const QString &arg1)
+{
+    //Посылаем коэффициенты
+    if (connected){
+        cubie->sendVar("p",QString::number(ui->P_SpinBox->value()*1000));
+    }
+}
+
+void MainWindow::on_I_SpinBox_valueChanged(const QString &arg1)
+{
+    //Посылаем коэффициенты
+    if (connected){
+        cubie->sendVar("i",QString::number(ui->I_SpinBox->value()*1000));
+    }
+}
+
+void MainWindow::on_D_SpinBox_valueChanged(const QString &arg1)
+{
+    //Посылаем коэффициенты
+    if (connected){
+        cubie->sendVar("d",QString::number(ui->D_SpinBox->value()*1000));
+    }
 }

@@ -27,6 +27,14 @@ private slots:
     void on_throttleSlider_valueChanged(int value);
     void on_action_keys_triggered();
 
+    void on_pushButton_clicked();
+
+    void on_P_SpinBox_valueChanged(const QString &arg1);
+
+    void on_I_SpinBox_valueChanged(const QString &arg1);
+
+    void on_D_SpinBox_valueChanged(const QString &arg1);
+
 public slots:
     void connectionEstablished();
     void packetSent();
