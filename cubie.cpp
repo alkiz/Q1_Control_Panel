@@ -16,8 +16,6 @@ void Cubie::sendTest(){
 }
 void Cubie::sendVar(const QString &key, const QString &value){
     QString data= QString("%1=%2\n").arg(key).arg(value);
-    //QString::sprintf (data, "%s=%s\n", &key, &value);
-    //this->udpsocket->writeDatagram(data.toLatin1(), QHostAddress(this->addr), this->port );
     this->tcpsocket->write(data.toLatin1());
     emit packetSent();
 }
