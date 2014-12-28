@@ -128,7 +128,7 @@ short findEndOfString(const char *str){// функция смотрит на с�
 	const short str_length=strlen(str);
 	short i=0;
 	for(i; i<str_length; i++){
-		if(str[i]=='\n') return i;
+		if(str[i]=='\n') return i; // да, действительна строка задающая
 	}
 	return 0; // строка запрашивающая
 }
