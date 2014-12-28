@@ -29,6 +29,7 @@ int main (int argc, char ** argv){
 	char value[DATAGRAM_MAXLENGTH]="";
 	char buf[DATAGRAM_MAXLENGTH];
 	char eq_position,end_position;
+	char str_length=0;
 	int tcpserver_port=27000;
 	int bytes_read;
 	
@@ -80,7 +81,7 @@ int main (int argc, char ** argv){
 			while(1)
 			{
 				bytes_read = recv(new_sock, buf, DATAGRAM_MAXLENGTH, 0);
-				printf("%d", bytes_read);
+				//printf("%d", bytes_read);
 				if(bytes_read <= 0) break;
 				
 				// buf - то что пришло с клиента
@@ -89,10 +90,11 @@ int main (int argc, char ** argv){
 				
 				eq_position=isSet(buf);
 				end_position = findEndOfString(buf);
+				str_length=end_position-eq_position;
 				strncpy(key,buf,eq_position);
-				substring(value, buf,eq_position+1,(bytes_read-eq_position));
+				substring(value, buf,eq_position+1, str_length);
 				key[eq_position]='\0';
-				printf("KEY: %s - VALUE: %s", key, value);
+				printf("KEY: '%s' - VALUE: '%s'\n", key, value);
 				
 				strcat(filename,DATA_DIR);
 				strcat(filename,key);
@@ -128,7 +130,7 @@ short findEndOfString(const char *str){// функция смотрит на с�
 	const short str_length=strlen(str);
 	short i=0;
 	for(i; i<str_length; i++){
-		if(str[i]=='\n') return i;
+		if(str[i]=='\n') return i-1;
 	}
 	return 0; // строка запрашивающая
 }
