@@ -28,7 +28,13 @@ int main (int argc, char ** argv){
 	char value[DATAGRAM_MAXLENGTH]="";
 	char buf[DATAGRAM_MAXLENGTH];
 	char position;
+	int tcpserver_port=27000;
 	int bytes_read;
+	
+	// получаю номер порта по которому будет происходить связь
+	const char PORT_ARGUMENT=1;
+	tcpserver_port = atoi(argv[PORT_ARGUMENT]);
+	
 	
 	// инициализация TCP сокета===========================================
 	int tcpsock,new_sock;
