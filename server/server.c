@@ -12,7 +12,7 @@
 
 #define TCPSERVER_PORT 27000
 #define DATAGRAM_MAXLENGTH 1024
-#define DATA_DIR "/ramfs/control/"
+#define DATA_DIR "./control/"
 
 
 
