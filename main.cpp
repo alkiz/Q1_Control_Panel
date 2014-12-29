@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "cubie.h"
 #include <QStyleFactory>
+#include <SDL2/SDL.h>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

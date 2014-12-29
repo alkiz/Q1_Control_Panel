@@ -29,3 +29,6 @@ FORMS    += mainwindow.ui \
 
 RESOURCES += \
     resources.qrc
+
+INCLUDEPATH += ./SDL/include
+LIBS += -L ./SDL/build/.libs -lSDL2
