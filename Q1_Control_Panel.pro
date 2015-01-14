@@ -31,4 +31,4 @@ RESOURCES += \
     resources.qrc
 
 INCLUDEPATH += ./SDL/include
-LIBS += -L ./SDL/build/.libs -lSDL2
+LIBS += -lSDL2
