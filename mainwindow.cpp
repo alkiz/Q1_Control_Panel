@@ -6,7 +6,6 @@
 #include <QKeyEvent>
 #include <QMessageBox>
 #include <QTimer>
-#include <SDL.h>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,15 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
     yawLeftKeyState = false;
     yawRightKeyState = false;
 
-    // Переменная для нашего джойстика
-    SDL_Joystick *joy;
-    SDL_Event event;
-    // Инициализация SDL для использования джойстика
-    SDL_Init(SDL_INIT_JOYSTICK);
-    // Включаем
-    SDL_JoystickEventState(SDL_ENABLE);
-    // Открываем ;)
-    joy = SDL_JoystickOpen(0);
 
 
     connected=false;
