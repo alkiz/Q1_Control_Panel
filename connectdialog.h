@@ -2,6 +2,7 @@
 #define CONNECTDIALOG_H
 
 #include <QDialog>
+#include <QNetworkSession>
 
 namespace Ui {
 class connectDialog;
@@ -16,6 +17,9 @@ public:
     ~connectDialog();
     QString getIp();
     int getPort();
+private slots:
+    void on_port_Edit_textChanged(const QString &arg1);
+
 private:
     Ui::connectDialog *ui;
 };

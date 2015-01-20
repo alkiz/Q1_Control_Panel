@@ -38,6 +38,8 @@ private slots:
 public slots:
     void connectionEstablished();
     void packetSent();
+    void feedbackConnectionEstablished();
+    void feedbackUpdate();
 private:
     Ui::MainWindow *ui;
     bool keyState[4];
@@ -59,6 +61,7 @@ private:
     void yaw_left();
     void yaw_right();
     void yaw_center();
+
 };
 
 #endif // MAINWINDOW_H

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>743</width>
-    <height>489</height>
+    <width>947</width>
+    <height>494</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -25,14 +25,14 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>0</y>
-      <width>67</width>
+      <width>131</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>VALUE</string>
+     <string>Q1 Control Panel</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -53,7 +53,7 @@
      <rect>
       <x>0</x>
       <y>20</y>
-      <width>741</width>
+      <width>941</width>
       <height>20</height>
      </rect>
     </property>
@@ -452,8 +452,8 @@
    <widget class="QGroupBox" name="blueGroupBox">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>70</y>
+      <x>310</x>
+      <y>50</y>
       <width>221</width>
       <height>241</height>
      </rect>
@@ -625,13 +625,99 @@
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="formLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>40</y>
+      <width>271</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="labelAlignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+     </property>
+     <property name="formAlignment">
+      <set>Qt::AlignHCenter|Qt::AlignTop</set>
+     </property>
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>Крен</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>Тангаж</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_11">
+       <property name="text">
+        <string>Рыскание</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="roll_info_label">
+       <property name="text">
+        <string>0.0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLabel" name="pitch_info_label">
+       <property name="text">
+        <string>0.0</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="yaw_info_label">
+       <property name="text">
+        <string>0.0</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>533</x>
+      <y>30</y>
+      <width>20</width>
+      <height>331</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="feedbackConnectLabel">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>0</y>
+      <width>271</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Входящий соединений нет</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>743</width>
+     <width>947</width>
      <height>29</height>
     </rect>
    </property>

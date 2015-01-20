@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->sendedPackets = 1;
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    //
     timer->start(20);
 
 
@@ -47,6 +48,18 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::feedbackUpdate(){
+
+    float pitch = cubie->getFeedbackPitch();
+    float roll = cubie->getFeedbackRoll();
+    float yaw = cubie->getFeedbackYaw();
+
+    ui->pitch_info_label->setText(QString::number(pitch));
+    ui->roll_info_label->setText(QString::number(roll));
+    ui->yaw_info_label->setText(QString::number(yaw));
+
 }
 
 void MainWindow::update(){
@@ -272,6 +285,8 @@ void MainWindow::connectionEstablished() {
     //this->showFullScreen();
     connected=true;
     cubie->sendTest();
+    connect(cubie, SIGNAL(dataReady()), this, SLOT(feedbackUpdate()));
+    connect(cubie, SIGNAL(newFeedbackConnection()), this, SLOT(feedbackConnectionEstablished()));
 }
 
 void MainWindow::packetSent() {
@@ -360,4 +375,7 @@ void MainWindow::on_D_SpinBox_valueChanged(const QString &arg1)
     if (connected){
         cubie->sendVar("d",QString::number(ui->D_SpinBox->value()*1000));
     }
+}
+void MainWindow::feedbackConnectionEstablished(){
+    ui->feedbackConnectLabel->setText("Входящее соединение установлено");
 }
