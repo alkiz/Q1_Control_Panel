@@ -94,7 +94,8 @@ int main (int argc, char ** argv){
 				strncpy(key,buf,eq_position);
 				substring(value, buf,eq_position+1, str_length);
 				key[eq_position]='\0';
-				printf("KEY: '%s' - VALUE: '%s'\n", key, value);
+				value[str_length]='\0';
+				printf("KEY: '%s' - VALUE: '%s'; BYTES_READ: %d\n", key, value, bytes_read);
 				
 				strcat(filename,DATA_DIR);
 				strcat(filename,key);
