@@ -7,7 +7,7 @@
 QT       += core gui
 QT       +=network
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
 TARGET = Q1_Control_Panel
 TEMPLATE = app
@@ -16,12 +16,14 @@ SOURCES += main.cpp\
 	mainwindow.cpp \
     cubie.cpp \
     connectdialog.cpp \
-    keysdialog.cpp
+    keysdialog.cpp \
+    qcustomplot.cpp
 
 HEADERS  += mainwindow.h \
     cubie.h \
     connectdialog.h \
-    keysdialog.h
+    keysdialog.h \
+    qcustomplot.h
 
 FORMS    += mainwindow.ui \
     connectdialog.ui \

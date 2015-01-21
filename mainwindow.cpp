@@ -42,12 +42,135 @@ MainWindow::MainWindow(QWidget *parent) :
     //
     timer->start(20);
 
+    QTimer *graphUpdater = new QTimer(this);
+    connect(graphUpdater, SIGNAL(timeout()), this, SLOT(graphUpdate()));
+    //
+    graphUpdater->start(50);
+
+    graphInit();
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+void MainWindow::graphInit(){
+
+    x.resize(100);
+    pitchData.resize(100);
+    rollData.resize(100);
+    yawData.resize(100);
+
+
+    for (int i=0; i<100; ++i)
+    {
+      x[i] = i; // x goes from 0 to 99
+      pitchData[i] = 0;
+      rollData[i] = 0;
+      yawData[i] = 0;
+    }
+
+    //======================================Pitch==========
+    ui->pitch_plot->addGraph();
+    ui->pitch_plot->graph(0)->setData(x,pitchData);
+
+    //настраиваем оси координат
+    ui->pitch_plot->xAxis->setLabel("");
+    ui->pitch_plot->yAxis->setLabel("");
+
+    ui->pitch_plot->xAxis->setRange(0,100); // По оси абсцисс 100 значений
+    ui->pitch_plot->yAxis->setRange(-90,90); // По оси ординат диапазон от -90 до 90 градусов
+    ui->pitch_plot->xAxis->setVisible(false);
+    ui->pitch_plot->yAxis->setVisible(true);
+    QFont font_helvetica("Helvetica");
+
+    QVector<double> yTicks(7);
+    for (int i=0; i<7; ++i)
+    {
+      yTicks[i]=i*30 - 90;
+    }
+
+
+    ui->pitch_plot->yAxis->setLabelFont(font_helvetica);
+   // ui->pitch_plot->yAxis->setLabel
+
+    ui->pitch_plot->yAxis->setPadding(11);
+    ui->pitch_plot->yAxis->setAutoTicks(false);
+    ui->pitch_plot->yAxis->setTickVector(yTicks);
+
+    ui->pitch_plot->replot();
+
+
+    //======================================Roll===========
+    ui->roll_plot->addGraph();
+    ui->roll_plot->graph(0)->setData(x,rollData);
+
+    //настраиваем оси координат
+    ui->roll_plot->xAxis->setLabel("");
+    ui->roll_plot->yAxis->setLabel("");
+
+    ui->roll_plot->xAxis->setRange(0,100); // По оси абсцисс 100 значений
+    ui->roll_plot->yAxis->setRange(-90,90); // По оси ординат диапазон от -90 до 90 градусов
+    ui->roll_plot->xAxis->setVisible(false);
+    ui->roll_plot->yAxis->setVisible(true);
+    ui->roll_plot->yAxis->setLabelFont(font_helvetica);
+   // ui->roll_plot->yAxis->setLabel
+    ui->roll_plot->yAxis->setPadding(11);
+    ui->roll_plot->yAxis->setAutoTicks(false);
+    ui->roll_plot->yAxis->setTickVector(yTicks);
+    ui->roll_plot->replot();
+
+    //=======================================Yaw=============
+    ui->yaw_plot->addGraph();
+    ui->yaw_plot->graph(0)->setData(x,yawData);
+
+    //настраиваем оси координат
+    ui->yaw_plot->xAxis->setLabel("");
+    ui->yaw_plot->yAxis->setLabel("");
+
+    ui->yaw_plot->xAxis->setRange(0,100); // По оси абсцисс 100 значений
+    ui->yaw_plot->yAxis->setRange(-180,180); // По оси ординат диапазон от -90 до 90 градусов
+    ui->yaw_plot->xAxis->setVisible(false);
+    ui->yaw_plot->yAxis->setVisible(true);
+    ui->yaw_plot->yAxis->setLabelFont(font_helvetica);
+   // ui->roll_plot->yAxis->setLabel
+
+    QVector<double> yTicksYaw(7);
+    for (int i=0; i<7; ++i)
+    {
+      yTicksYaw[i]=i*60 - 180;
+    }
+
+    ui->yaw_plot->yAxis->setPadding(0);
+    ui->yaw_plot->yAxis->setAutoTicks(false);
+    ui->yaw_plot->yAxis->setTickVector(yTicksYaw);
+    ui->yaw_plot->replot();
+}
+
+void MainWindow::graphUpdate(){
+
+    //========================Pitch Update============
+    pitchData.removeFirst();
+    pitchData.append(cubie->getFeedbackPitch());
+    ui->pitch_plot->graph(0)->setData(x,pitchData);
+    ui->pitch_plot->replot();
+
+    //========================Roll Update============
+    rollData.removeFirst();
+    rollData.append(cubie->getFeedbackRoll());
+    ui->roll_plot->graph(0)->setData(x,rollData);
+    ui->roll_plot->replot();
+
+    //========================Yaw Update============
+    yawData.removeFirst();
+    yawData.append(cubie->getFeedbackYaw());
+    ui->yaw_plot->graph(0)->setData(x,yawData);
+    ui->yaw_plot->replot();
+
+    return;
 }
 
 void MainWindow::feedbackUpdate(){
@@ -59,6 +182,7 @@ void MainWindow::feedbackUpdate(){
     ui->pitch_info_label->setText(QString::number(pitch));
     ui->roll_info_label->setText(QString::number(roll));
     ui->yaw_info_label->setText(QString::number(yaw));
+    graphUpdate();
 
 }
 

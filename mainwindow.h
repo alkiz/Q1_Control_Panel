@@ -40,6 +40,7 @@ public slots:
     void packetSent();
     void feedbackConnectionEstablished();
     void feedbackUpdate();
+    void graphUpdate();
 private:
     Ui::MainWindow *ui;
     bool keyState[4];
@@ -52,6 +53,8 @@ private:
     bool connected;
     connectDialog cDialog;
     keysDialog kDialog;
+    QVector<double> x, pitchData, rollData, yawData;
+
 
     //Функции
     void keyPressEvent(QKeyEvent*);
@@ -61,6 +64,7 @@ private:
     void yaw_left();
     void yaw_right();
     void yaw_center();
+    void graphInit();
 
 };
 

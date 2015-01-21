@@ -625,73 +625,13 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="formLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>570</x>
-      <y>40</y>
-      <width>271</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <layout class="QFormLayout" name="formLayout">
-     <property name="labelAlignment">
-      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-     </property>
-     <property name="formAlignment">
-      <set>Qt::AlignHCenter|Qt::AlignTop</set>
-     </property>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_9">
-       <property name="text">
-        <string>Крен</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_10">
-       <property name="text">
-        <string>Тангаж</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_11">
-       <property name="text">
-        <string>Рыскание</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLabel" name="roll_info_label">
-       <property name="text">
-        <string>0.0</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="pitch_info_label">
-       <property name="text">
-        <string>0.0</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="yaw_info_label">
-       <property name="text">
-        <string>0.0</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
    <widget class="Line" name="line_2">
     <property name="geometry">
      <rect>
       <x>533</x>
       <y>30</y>
       <width>20</width>
-      <height>331</height>
+      <height>411</height>
      </rect>
     </property>
     <property name="orientation">
@@ -710,6 +650,154 @@
     <property name="text">
      <string>Входящий соединений нет</string>
     </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>40</y>
+      <width>371</width>
+      <height>390</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+    <widget class="QCustomPlot" name="pitch_plot" native="true">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>130</y>
+       <width>231</width>
+       <height>130</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_11">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>300</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Рыскание</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="yaw_info_label">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>310</y>
+       <width>70</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>0.0</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>140</y>
+       <width>51</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Тангаж</string>
+     </property>
+    </widget>
+    <widget class="QCustomPlot" name="roll_plot" native="true">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>0</y>
+       <width>231</width>
+       <height>130</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="pitch_info_label">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>180</y>
+       <width>70</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>0.0</string>
+     </property>
+    </widget>
+    <widget class="QCustomPlot" name="yaw_plot" native="true">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>260</y>
+       <width>231</width>
+       <height>130</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>40</y>
+       <width>41</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Крен</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="roll_info_label">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>50</y>
+       <width>70</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>10</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>1</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>10</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>0.0</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -762,6 +850,14 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>

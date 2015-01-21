@@ -20,5 +20,8 @@
         <file>up_right_green.png</file>
         <file>cycle_left.png</file>
         <file>cycle_right.png</file>
+        <file>pitch.png</file>
+        <file>roll.png</file>
+        <file>yaw.png</file>
     </qresource>
 </RCC>
