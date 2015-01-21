@@ -45,7 +45,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QTimer *graphUpdater = new QTimer(this);
     connect(graphUpdater, SIGNAL(timeout()), this, SLOT(graphUpdate()));
     //
-    graphUpdater->start(50);
+    graphUpdater->start(100);
 
     graphInit();
 
@@ -101,6 +101,8 @@ void MainWindow::graphInit(){
     ui->pitch_plot->yAxis->setAutoTicks(false);
     ui->pitch_plot->yAxis->setTickVector(yTicks);
 
+    ui->pitch_plot->setBackground(QBrush(QColor(239,235,231)));
+
     ui->pitch_plot->replot();
 
 
@@ -121,6 +123,7 @@ void MainWindow::graphInit(){
     ui->roll_plot->yAxis->setPadding(11);
     ui->roll_plot->yAxis->setAutoTicks(false);
     ui->roll_plot->yAxis->setTickVector(yTicks);
+    ui->roll_plot->setBackground(QBrush(QColor(239,235,231)));
     ui->roll_plot->replot();
 
     //=======================================Yaw=============
@@ -147,6 +150,7 @@ void MainWindow::graphInit(){
     ui->yaw_plot->yAxis->setPadding(0);
     ui->yaw_plot->yAxis->setAutoTicks(false);
     ui->yaw_plot->yAxis->setTickVector(yTicksYaw);
+    ui->yaw_plot->setBackground(QBrush(QColor(239,235,231)));
     ui->yaw_plot->replot();
 }
 
@@ -169,6 +173,11 @@ void MainWindow::graphUpdate(){
     yawData.append(cubie->getFeedbackYaw());
     ui->yaw_plot->graph(0)->setData(x,yawData);
     ui->yaw_plot->replot();
+
+
+    //========================Throttle Update========
+    ui->feedback_throttle->setValue(cubie->getFeedbackThrottle());
+    ui->feedback_throttle_label->setText(QString::number(cubie->getFeedbackThrottle()));
 
     return;
 }

@@ -29,6 +29,7 @@ public:
     float getFeedbackPitch();
     float getFeedbackRoll();
     float getFeedbackYaw();
+    int getFeedbackThrottle();
     bool isConnected();
 
 private:
@@ -44,6 +45,7 @@ private:
     int feedback_pitch=0; // тангаж*1000; для упрощения передачи по сети чисел с плавающей точкой
     int feedback_roll=0; // крен*1000
     int feedback_yaw=0; // рыскание*1000
+    int feedback_throttle=0; // реальная тяга
     quint16     m_nNextBlockSize;
 
 

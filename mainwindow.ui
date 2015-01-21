@@ -213,7 +213,7 @@
      <property name="checkable">
       <bool>false</bool>
      </property>
-     <widget class="QProgressBar" name="progressBar">
+     <widget class="QProgressBar" name="feedback_throttle">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -311,7 +311,7 @@
        <number>5</number>
       </property>
      </widget>
-     <widget class="QLabel" name="label_4">
+     <widget class="QLabel" name="feedback_throttle_label">
       <property name="geometry">
        <rect>
         <x>10</x>

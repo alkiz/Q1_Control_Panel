@@ -63,6 +63,10 @@ float Cubie::getFeedbackYaw(){
 
     return feedback_yaw/1000.0;
 }
+int Cubie::getFeedbackThrottle(){
+    return feedback_throttle;
+}
+
 bool Cubie::isConnected(){
     return connection_status;
 }
@@ -98,6 +102,10 @@ void Cubie::parseIncomingData(QString &data){
     }
     if (key.compare("yaw")==0) {
         this->feedback_yaw=value.toInt();
+        return;
+    }
+    if (key.compare("throttle")==0) {
+        this->feedback_throttle=value.toInt();
         return;
     }
 

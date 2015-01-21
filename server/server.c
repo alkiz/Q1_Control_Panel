@@ -1,6 +1,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -21,6 +22,8 @@ short isSet(const char *str);
 short findEndOfString(const char *str);
 void substring(char *subline, const char *str, short begin, short count);
 int msleep(int msec);
+void writeMyPort(int port);
+void writeClientIp(char * ip);
 
 int main (int argc, char ** argv){
 	// инициализация необходимых для работы сокетов
@@ -36,11 +39,11 @@ int main (int argc, char ** argv){
 	// получаю номер порта по которому будет происходить связь
 	const char PORT_ARGUMENT=1;
 	tcpserver_port = atoi(argv[PORT_ARGUMENT]);
-	
+	writeMyPort(tcpserver_port);
 	
 	// инициализация TCP сокета===========================================
 	int tcpsock,new_sock;
-	struct sockaddr_in tcpaddr;
+	struct sockaddr_in tcpaddr,peer;
 	int ready_to_recieve;
 	
 	tcpsock =socket(AF_INET, SOCK_STREAM, 0); // создаём TCP-сокет
@@ -66,18 +69,22 @@ int main (int argc, char ** argv){
 	ready_to_recieve=listen(tcpsock, 1); // говорю tcp-сокету слушать порт
 	// конец инициализации TCP-сокета=====================================
 	
+	
 	while(1)
 	{
 		
 		//================================TCP - Часть=========================================
 		if(ready_to_recieve==0){
-			new_sock = accept(tcpsock, NULL, NULL);
+			int size = sizeof(peer);
+			new_sock = accept(tcpsock, (struct sockaddr*)&peer, (socklen_t*)&size);
 			if(new_sock < 0)
 			{
 				perror("accept");
 				exit(3);
 			}
-
+			//printf("ADDRES: %s \n", inet_ntoa(peer.sin_addr));
+			writeClientIp(inet_ntoa(peer.sin_addr));
+			system("./feedback");
 			while(1)
 			{
 				bytes_read = recv(new_sock, buf, DATAGRAM_MAXLENGTH, 0);
@@ -107,7 +114,7 @@ int main (int argc, char ** argv){
 				fwrite(value, strlen(value), 1, file);
 				fclose(file);
 				
-				send(new_sock, buf, bytes_read, 0);
+				//send(new_sock, buf, bytes_read, 0);
 			}
 
 			close(new_sock);
@@ -150,5 +157,36 @@ int msleep(int msec)
 {
 	return usleep(1000*msec);
 }
+void writeMyPort(int port){
+	char filename[DATAGRAM_MAXLENGTH]="";
+	//char port_string[6]="";
+	strcat(filename,DATA_DIR);
+	strcat(filename,"port");
+	FILE *file;
+	if((file = fopen(filename, "w"))==NULL) {
+		perror("Cannot open file.");
+		exit (1);
+	}
+	fprintf(file,"%d", port);
+	printf("\n%d\n", port);
+	fclose(file);
+	//fwrite(port_string, strlen(port_string), 1, file);
 
+}
+void writeClientIp(char * ip){
+	char filename[DATAGRAM_MAXLENGTH]="";
+	//char port_string[6]="";
+	strcat(filename,DATA_DIR);
+	strcat(filename,"client_ip");
+	FILE *file;
+	if((file = fopen(filename, "w"))==NULL) {
+		perror("Cannot open file.");
+		exit (1);
+	}
+	fprintf(file,"%s", ip);
+	printf("\n%s\n", ip);
+	fclose(file);
+	//fwrite(port_string, strlen(port_string), 1, file);
+
+}
 
