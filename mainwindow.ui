@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>947</width>
-    <height>494</height>
+    <height>734</height>
    </rect>
   </property>
   <property name="focusPolicy">
@@ -631,7 +631,7 @@
       <x>533</x>
       <y>30</y>
       <width>20</width>
-      <height>411</height>
+      <height>651</height>
      </rect>
     </property>
     <property name="orientation">
@@ -799,6 +799,16 @@
      </property>
     </widget>
    </widget>
+   <widget class="DisplayGLWidget" name="displayGL" native="true">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>440</y>
+      <width>231</width>
+      <height>211</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -855,6 +865,12 @@
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
    <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>DisplayGLWidget</class>
+   <extends>QWidget</extends>
+   <header>displayglwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
