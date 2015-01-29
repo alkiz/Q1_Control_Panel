@@ -3,27 +3,29 @@
 
 #include <QGLWidget>
 #include <QtOpenGL>
+#include <GL/glu.h>
 
 class DisplayGLWidget : public QGLWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    explicit DisplayGLWidget(QWidget *parent = 0);
+	explicit DisplayGLWidget(QWidget *parent = 0);
 
 
-    void setPitchAngle(float angle);
-    void setRollAngle(float angle);
-    void setYawAngle(float angle);
+	void setPitchAngle(float angle);
+	void setRollAngle(float angle);
+	void setYawAngle(float angle);
+
 
 
 private:
 
-    float pitchAngle;
-    float rollAngle;
-    float yawAngle;
+	float pitchAngle;
+	float rollAngle;
+	float yawAngle;
 
-    QColor qtRed;
-    QColor qtGray;
+	QColor qtRed;
+	QColor qtGray;
 
 
 signals:
@@ -31,9 +33,9 @@ signals:
 public slots:
 
 protected:
-    void initializeGL();
-    void paintGL();
-    void resizeGL(int width, int height);
+	void initializeGL();
+	void paintGL();
+	void resizeGL(int width, int height);
 
 };
 

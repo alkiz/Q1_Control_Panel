@@ -2,13 +2,13 @@
 #include "ui_keysdialog.h"
 
 keysDialog::keysDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::keysDialog)
+	QDialog(parent),
+	ui(new Ui::keysDialog)
 {
-    ui->setupUi(this);
+	ui->setupUi(this);
 }
 
 keysDialog::~keysDialog()
 {
-    delete ui;
+	delete ui;
 }

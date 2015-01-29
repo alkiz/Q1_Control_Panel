@@ -802,10 +802,10 @@
    <widget class="DisplayGLWidget" name="displayGL" native="true">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>440</y>
-      <width>231</width>
-      <height>211</height>
+      <x>120</x>
+      <y>340</y>
+      <width>331</width>
+      <height>331</height>
      </rect>
     </property>
    </widget>

@@ -9,14 +9,14 @@ class keysDialog;
 
 class keysDialog : public QDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit keysDialog(QWidget *parent = 0);
-    ~keysDialog();
+	explicit keysDialog(QWidget *parent = 0);
+	~keysDialog();
 
 private:
-    Ui::keysDialog *ui;
+	Ui::keysDialog *ui;
 };
 
 #endif // KEYSDIALOG_H

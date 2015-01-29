@@ -4,8 +4,9 @@
 #
 #-------------------------------------------------
 
-QT       += core gui opengl
-QT       +=network
+
+QT+= core gui opengl
+QT+=network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 
@@ -14,23 +15,25 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
 	mainwindow.cpp \
-    cubie.cpp \
-    connectdialog.cpp \
-    keysdialog.cpp \
-    qcustomplot.cpp \
-    displayglwidget.cpp
+	cubie.cpp \
+	connectdialog.cpp \
+	keysdialog.cpp \
+	qcustomplot.cpp \
+	displayglwidget.cpp
 
 HEADERS  += mainwindow.h \
-    cubie.h \
-    connectdialog.h \
-    keysdialog.h \
-    qcustomplot.h \
-    displayglwidget.h
+	cubie.h \
+	connectdialog.h \
+	keysdialog.h \
+	qcustomplot.h \
+	displayglwidget.h
 
-FORMS    += mainwindow.ui \
-    connectdialog.ui \
-    keysdialog.ui
+FORMS+= mainwindow.ui \
+	connectdialog.ui \
+	keysdialog.ui
 
 RESOURCES += \
-    resources.qrc
+	resources.qrc
+
+LIBS += -L/usr/lib/x86_64-linux-gnu/ -lGLU
 
