@@ -78,14 +78,14 @@
      <rect>
       <x>10</x>
       <y>40</y>
-      <width>331</width>
+      <width>261</width>
       <height>301</height>
      </rect>
     </property>
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>180</x>
+       <x>150</x>
        <y>270</y>
        <width>71</width>
        <height>21</height>
@@ -98,7 +98,7 @@
     <widget class="QCheckBox" name="checkBox">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>90</x>
        <y>0</y>
        <width>161</width>
        <height>26</height>
@@ -117,7 +117,7 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>130</x>
+       <x>100</x>
        <y>240</y>
        <width>164</width>
        <height>19</height>
@@ -151,7 +151,7 @@
     <widget class="QLabel" name="label_8">
      <property name="geometry">
       <rect>
-       <x>170</x>
+       <x>140</x>
        <y>220</y>
        <width>91</width>
        <height>21</height>
@@ -169,7 +169,7 @@
     <widget class="QSpinBox" name="yaw_sesitivity_spinBox">
      <property name="geometry">
       <rect>
-       <x>180</x>
+       <x>150</x>
        <y>200</y>
        <width>52</width>
        <height>21</height>
@@ -346,7 +346,7 @@
     <widget class="QDoubleSpinBox" name="P_SpinBox">
      <property name="geometry">
       <rect>
-       <x>170</x>
+       <x>140</x>
        <y>60</y>
        <width>76</width>
        <height>31</height>
@@ -368,7 +368,7 @@
     <widget class="QDoubleSpinBox" name="I_SpinBox">
      <property name="geometry">
       <rect>
-       <x>170</x>
+       <x>140</x>
        <y>100</y>
        <width>76</width>
        <height>31</height>
@@ -390,7 +390,7 @@
     <widget class="QDoubleSpinBox" name="D_SpinBox">
      <property name="geometry">
       <rect>
-       <x>170</x>
+       <x>140</x>
        <y>140</y>
        <width>76</width>
        <height>31</height>
@@ -412,7 +412,7 @@
     <widget class="QLabel" name="P_label">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>110</x>
        <y>60</y>
        <width>21</width>
        <height>21</height>
@@ -425,7 +425,7 @@
     <widget class="QLabel" name="I_label">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>110</x>
        <y>110</y>
        <width>21</width>
        <height>21</height>
@@ -438,7 +438,7 @@
     <widget class="QLabel" name="D_label">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>110</x>
        <y>140</y>
        <width>21</width>
        <height>21</height>
@@ -448,180 +448,131 @@
       <string>D</string>
      </property>
     </widget>
+    <zorder>label_6</zorder>
+    <zorder>checkBox</zorder>
+    <zorder>yawSlider</zorder>
+    <zorder>label_8</zorder>
+    <zorder>yaw_sesitivity_spinBox</zorder>
+    <zorder>throttleBox</zorder>
+    <zorder>P_SpinBox</zorder>
+    <zorder>I_SpinBox</zorder>
+    <zorder>D_SpinBox</zorder>
+    <zorder>P_label</zorder>
+    <zorder>I_label</zorder>
+    <zorder>D_label</zorder>
+    <zorder>groupBox_2</zorder>
+    <zorder>displayGL</zorder>
+    <zorder>line</zorder>
    </widget>
    <widget class="QGroupBox" name="blueGroupBox">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>50</y>
-      <width>221</width>
-      <height>241</height>
+      <x>270</x>
+      <y>40</y>
+      <width>261</width>
+      <height>271</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
     </property>
     <property name="flat">
      <bool>false</bool>
     </property>
-    <widget class="QLabel" name="label_circle_blue">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>70</y>
-       <width>64</width>
-       <height>64</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/circle_blue.png</pixmap>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_up_blue">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>0</y>
-       <width>64</width>
-       <height>64</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/up_blue.png</pixmap>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_left_blue">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>70</y>
-       <width>64</width>
-       <height>64</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/left_blue.png</pixmap>
-     </property>
-     <property name="scaledContents">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_down_blue">
-     <property name="geometry">
-      <rect>
-       <x>70</x>
-       <y>130</y>
-       <width>64</width>
-       <height>64</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/down_blue.png</pixmap>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_up_left_blue">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>20</y>
-       <width>64</width>
-       <height>64</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/up_left_blue.png</pixmap>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_up_right_blue">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>20</y>
-       <width>64</width>
-       <height>64</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/up_right_blue.png</pixmap>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_down_right_blue">
-     <property name="geometry">
-      <rect>
-       <x>120</x>
-       <y>120</y>
-       <width>64</width>
-       <height>64</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/down_right_blue.png</pixmap>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_down_left_blue">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>120</y>
-       <width>64</width>
-       <height>64</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/down_left_blue.png</pixmap>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_right_blue">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>70</y>
-       <width>64</width>
-       <height>64</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap resource="resources.qrc">:/images/right_blue.png</pixmap>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>210</y>
+       <x>50</x>
+       <y>240</y>
        <width>121</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
       <string>Крен и тангаж</string>
+     </property>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>200</width>
+       <height>200</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QGroupBox {
+   border: 1px solid gray;
+   border-radius: 3px;
+}
+</string>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <widget class="QLabel" name="label_circle_blue">
+      <property name="geometry">
+       <rect>
+        <x>68</x>
+        <y>68</y>
+        <width>64</width>
+        <height>64</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="resources.qrc">:/images/circle_blue.png</pixmap>
+      </property>
+     </widget>
+     <zorder>blueGroupBox</zorder>
+     <zorder>label_circle_blue</zorder>
+    </widget>
+    <widget class="QLabel" name="label_pitch_control">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>20</y>
+       <width>67</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="pitch_roll_sesitivity_spinBox">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>240</y>
+       <width>52</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::NoFocus</enum>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>5</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_roll_control">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>130</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>0</string>
      </property>
     </widget>
    </widget>

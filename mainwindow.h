@@ -56,9 +56,20 @@ private:
 	void keyReleaseEvent(QKeyEvent*);
 	void throttle_up();
 	void throttle_down();
+
 	void yaw_left();
 	void yaw_right();
 	void yaw_center();
+
+	void roll_left();
+	void roll_right();
+	void roll_center();
+
+	void pitch_up();
+	void pitch_down();
+	void pitch_center();
+
+
 	void graphInit();
 
 };

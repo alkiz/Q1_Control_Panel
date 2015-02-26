@@ -32,19 +32,38 @@ void DisplayGLWidget::initializeGL()
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	glMatrixMode(GL_PROJECTION); // Выбираю матрицу проэкции
+	glLoadIdentity(); // Устанавливаю её в еденичную
 
-	glEnable(GL_DEPTH_TEST);
-	glShadeModel(GL_SMOOTH);
-	glEnable(GL_CULL_FACE);
-	//glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	static GLfloat lightPosition[4] = { 0.0, -5.0, -5.0, 1.0 };
+	glEnable(GL_DEPTH_TEST); // Включаю буффер глубины
+	glShadeModel(GL_SMOOTH); // Включаю плавные цвета
+	//glEnable(GL_CULL_FACE); // Отображать только лицевые грани
+	glEnable(GL_LIGHTING); // Активировать освещение
+	glEnable(GL_LIGHT0);	//Активировтаь первый светильник
+	glEnable(GL_NORMALIZE); //Нормализация векторов нормалей
+
+	static GLfloat lightPosition[4] = { 200, 200, -200, 1.0 };
+	static GLfloat whiteLight[4] = {1, 1, 1, 1};
+	static GLfloat matSpecular[] = {0.1,0.1,0.1,1};
+	static GLfloat matShininess[] = {0.0};
+
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
+	glLightfv(GL_LIGHT0,GL_DIFFUSE, whiteLight);
+	glLightfv(GL_LIGHT0,GL_SPECULAR, whiteLight);
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, matSpecular);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, matShininess);
+
 	glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 1.0);
 	glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.0);
 	glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.0);
+
+
+	glEnable(GL_POLYGON_SMOOTH);
+	glBlendFunc(GL_SRC0_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+
+	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 
 
 }
@@ -135,37 +154,37 @@ void DisplayGLWidget::paintGL()
 	//glDrawElements(GL_QUADS, 24, GL_INT, indexArray);
 	glColor3ubv(almostWhiteColor);
 	glBegin(GL_QUADS);
-		//glNormal3iv(normalArray);
+		glNormal3iv(normalArray);
 		glArrayElement(0);
 		glArrayElement(1);
 		glArrayElement(2);
 		glArrayElement(3);
 
-		//glNormal3iv(normalArray+1*3*sizeof(int));
+		glNormal3iv(normalArray+1*3*sizeof(int));
 		glArrayElement(4);
 		glArrayElement(0);
 		glArrayElement(3);
 		glArrayElement(7);
 
-		//glNormal3iv(normalArray+2*3*sizeof(int));
+		glNormal3iv(normalArray+2*3*sizeof(int));
 		glArrayElement(1);
 		glArrayElement(5);
 		glArrayElement(6);
 		glArrayElement(2);
 
-		//glNormal3iv(normalArray+3*3*sizeof(int));
+		glNormal3iv(normalArray+3*3*sizeof(int));
 		glArrayElement(3);
 		glArrayElement(2);
 		glArrayElement(6);
 		glArrayElement(7);
 
-		//glNormal3iv(normalArray+4*3*sizeof(int));
+		glNormal3iv(normalArray+4*3*sizeof(int));
 		glArrayElement(4);
 		glArrayElement(5);
 		glArrayElement(1);
 		glArrayElement(0);
 
-		//glNormal3iv(normalArray+5*3*sizeof(int));
+		glNormal3iv(normalArray+5*3*sizeof(int));
 		glArrayElement(5);
 		glArrayElement(4);
 		glArrayElement(7);
@@ -176,37 +195,37 @@ void DisplayGLWidget::paintGL()
 
 	glColor3ubv(redColor);
 	glBegin(GL_QUADS);
-		//glNormal3iv(normalArray);
+		glNormal3iv(normalArray);
 		glArrayElement(0);
 		glArrayElement(1);
 		glArrayElement(2);
 		glArrayElement(3);
 
-		//glNormal3iv(normalArray+1*3*sizeof(int));
+		glNormal3iv(normalArray+1*3*sizeof(int));
 		glArrayElement(4);
 		glArrayElement(0);
 		glArrayElement(3);
 		glArrayElement(7);
 
-		//glNormal3iv(normalArray+2*3*sizeof(int));
+		glNormal3iv(normalArray+2*3*sizeof(int));
 		glArrayElement(1);
 		glArrayElement(5);
 		glArrayElement(6);
 		glArrayElement(2);
 
-		//glNormal3iv(normalArray+3*3*sizeof(int));
+		glNormal3iv(normalArray+3*3*sizeof(int));
 		glArrayElement(3);
 		glArrayElement(2);
 		glArrayElement(6);
 		glArrayElement(7);
 
-		//glNormal3iv(normalArray+4*3*sizeof(int));
+		glNormal3iv(normalArray+4*3*sizeof(int));
 		glArrayElement(4);
 		glArrayElement(5);
 		glArrayElement(1);
 		glArrayElement(0);
 
-		//glNormal3iv(normalArray+5*3*sizeof(int));
+		glNormal3iv(normalArray+5*3*sizeof(int));
 		glArrayElement(5);
 		glArrayElement(4);
 		glArrayElement(7);
@@ -218,37 +237,37 @@ void DisplayGLWidget::paintGL()
 	glVertexPointer(3, GL_INT, 0, frontFrameVertexArray);
 	glColor3ubv(greenColor);
 	glBegin(GL_QUADS);
-		//glNormal3iv(normalArray);
+		glNormal3iv(normalArray);
 		glArrayElement(0);
 		glArrayElement(1);
 		glArrayElement(2);
 		glArrayElement(3);
 
-		//glNormal3iv(normalArray+1*3*sizeof(int));
+		glNormal3iv(normalArray+1*3*sizeof(int));
 		glArrayElement(4);
 		glArrayElement(0);
 		glArrayElement(3);
 		glArrayElement(7);
 
-		//glNormal3iv(normalArray+2*3*sizeof(int));
+		glNormal3iv(normalArray+2*3*sizeof(int));
 		glArrayElement(1);
 		glArrayElement(5);
 		glArrayElement(6);
 		glArrayElement(2);
 
-		//glNormal3iv(normalArray+3*3*sizeof(int));
+		glNormal3iv(normalArray+3*3*sizeof(int));
 		glArrayElement(3);
 		glArrayElement(2);
 		glArrayElement(6);
 		glArrayElement(7);
 
-		//glNormal3iv(normalArray+4*3*sizeof(int));
+		glNormal3iv(normalArray+4*3*sizeof(int));
 		glArrayElement(4);
 		glArrayElement(5);
 		glArrayElement(1);
 		glArrayElement(0);
 
-		//glNormal3iv(normalArray+5*3*sizeof(int));
+		glNormal3iv(normalArray+5*3*sizeof(int));
 		glArrayElement(5);
 		glArrayElement(4);
 		glArrayElement(7);
@@ -257,11 +276,53 @@ void DisplayGLWidget::paintGL()
 
 	glColor3ubv(yellowColor);
 	glBegin(GL_QUADS);
+
+		glNormal3iv(normalArray+3*3*sizeof(int));
 		glVertex3f(-141.42, 5.01,       0);
 		glVertex3f(      0, 5.01,  141.42);
 		glVertex3f( 141.42, 5.01,       0);
 		glVertex3f(      0, 5.01, -141.42);
 	glEnd();
+
+	GLUquadricObj* quad =  gluNewQuadric();
+
+	//glLoadIdentity();
+	glPushMatrix();
+		glTranslatef(-270,5,0);
+		glRotatef(-90, 1,0,0);
+		glColor3ubv(violetColor);
+		gluCylinder(quad, 16, 16, 30, 24, 20);
+		glTranslatef(0,0,30);
+		gluDisk(quad, 0, 16, 24, 1);
+
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(270,5,0);
+	glRotatef(-90, 1,0,0);
+	glColor3ubv(violetColor);
+	gluCylinder(quad, 16, 16, 30, 24, 20);
+	glTranslatef(0,0,30);
+	gluDisk(quad, 0, 16, 24, 1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0,5,270);
+	glRotatef(-90, 1,0,0);
+	glColor3ubv(violetColor);
+	gluCylinder(quad, 16, 16, 30, 24, 20);
+	glTranslatef(0,0,30);
+	gluDisk(quad, 0, 16, 24, 1);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0,5,-270);
+	glRotatef(-90, 1,0,0);
+	glColor3ubv(violetColor);
+	gluCylinder(quad, 16, 16, 30, 24, 20);
+	glTranslatef(0,0,30);
+	gluDisk(quad, 0, 16, 24, 1);
+	glPopMatrix();
 
 
 

@@ -35,5 +35,5 @@ FORMS+= mainwindow.ui \
 RESOURCES += \
 	resources.qrc
 
-LIBS += -L/usr/lib/x86_64-linux-gnu/ -lGLU
+LIBS += -L/usr/lib/x86_64-linux-gnu/ -lGLU -lglut
 

@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	yawRightKeyState = false;
 
 	connected=false;
-
+	/*
 	ui->label_up_blue->hide();
 	ui->label_right_blue->hide();
 	ui->label_down_blue->hide();
@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui->label_up_left_blue->hide();
 	ui->label_down_left_blue->hide();
 	ui->label_down_right_blue->hide();
-
+	*/
 	this->sendedPackets = 1;
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(update()));
@@ -185,69 +185,48 @@ void MainWindow::feedbackUpdate(){
 
 void MainWindow::update(){
 
-	//QMessageBox::information(0, "Information", "Прошла секунда");
-	ui->label_up_blue->hide();
-	ui->label_right_blue->hide();
-	ui->label_down_blue->hide();
-	ui->label_left_blue->hide();
-	ui->label_up_right_blue->hide();
-	ui->label_up_left_blue->hide();
-	ui->label_down_left_blue->hide();
-	ui->label_down_right_blue->hide();
 
-	// разбор клавиш-стрелок (тангаж и крен)
-	if(keyState[0] && keyState[2]){
+	//Разбор крена
+	if(keyState[2] && !keyState[3]) {
+		roll_right();
 		if (connected){
-			cubie->sendVar("up","1");
-			cubie->sendVar("right","1");
+			cubie->sendVar("roll",ui->label_roll_control->text());
 		}
-		ui->label_up_right_blue->show();
 	}
-	else if(keyState[0] && keyState[3]) {
+	else if(keyState[3] && !keyState[2]) {
+		roll_left();
 		if (connected){
-			cubie->sendVar("up","1");
-			cubie->sendVar("left","1");
+			cubie->sendVar("roll",ui->label_roll_control->text());
 		}
-		ui->label_up_left_blue->show();
 	}
-	else if(keyState[1] && keyState[2]) {
-		if (connected) {
-			cubie->sendVar("down","1");
-			cubie->sendVar("right","1");
-		}
-		ui->label_down_right_blue->show();
-	}
+	else if(keyState[2] && keyState[3]) {
 
-	else if(keyState[1] && keyState[3]) {
+	} else if (ui->label_roll_control->text().toInt()!=0) {
+		roll_center();
 		if (connected){
-			cubie->sendVar("down","1");
-			cubie->sendVar("left","1");
+			cubie->sendVar("roll",ui->label_roll_control->text());
 		}
-		ui->label_down_left_blue->show();
 	}
-	else if(keyState[0]) {
+	//Разбор тангажа
+	if(keyState[0] && !keyState[1]) {
+		pitch_up();
 		if (connected){
-			cubie->sendVar("up","1");
+			cubie->sendVar("pitch",ui->label_pitch_control->text());
 		}
-		ui->label_up_blue->show();
 	}
-	else if(keyState[1]) {
+	else if(keyState[1] && !keyState[0]) {
+		pitch_down();
 		if (connected){
-			cubie->sendVar("down","1");
+			cubie->sendVar("pitch",ui->label_pitch_control->text());
 		}
-		ui->label_down_blue->show();
 	}
-	else if(keyState[2]) {
+	else if(keyState[0] && keyState[1]) {
+
+	} else if(ui->label_pitch_control->text().toInt()!=0) {
+		pitch_center();
 		if (connected){
-			cubie->sendVar("right","1");
+			cubie->sendVar("pitch",ui->label_pitch_control->text());
 		}
-		ui->label_right_blue->show();
-	}
-	else if(keyState[3]) {
-		if (connected){
-			cubie->sendVar("left","1");
-		}
-		ui->label_left_blue->show();
 	}
 
 	// разбор клавиш тяги
@@ -443,6 +422,110 @@ void MainWindow::yaw_center(){
 	ui->yawSlider->setValue(new_val);
 }
 
+void MainWindow::roll_left(){
+	int old= ui->label_roll_control->text().toInt();
+	int new_val = old-ui->pitch_roll_sesitivity_spinBox->value();
+	if(new_val<-100) new_val=-100;
+	ui->label_roll_control->setText(QString::number(new_val));
+
+	int x = ui->label_circle_blue->geometry().x();
+	int y = ui->label_circle_blue->geometry().y();
+	QSize size = ui->label_circle_blue->geometry().size();
+
+	int new_x = 68+ui->label_roll_control->text().toInt();
+
+	ui->label_circle_blue->setGeometry(new_x,y, size.width(), size.height());
+
+}
+void MainWindow::roll_right(){
+	int old= ui->label_roll_control->text().toInt();
+	int new_val = old+ui->pitch_roll_sesitivity_spinBox->value();
+	if(new_val>100) new_val=100;
+	ui->label_roll_control->setText(QString::number(new_val));
+
+	int x = ui->label_circle_blue->geometry().x();
+	int y = ui->label_circle_blue->geometry().y();
+	QSize size = ui->label_circle_blue->geometry().size();
+
+	int new_x = 68+ui->label_roll_control->text().toInt();
+
+	ui->label_circle_blue->setGeometry(new_x,y, size.width(), size.height());
+}
+void MainWindow::roll_center(){
+	int old= ui->label_roll_control->text().toInt();
+	int new_val=0;
+	if(old>0){
+		if (old >= ui->pitch_roll_sesitivity_spinBox->value()){
+			new_val = old-ui->pitch_roll_sesitivity_spinBox->value();
+		}
+	}
+	else if(old<0){
+		if ((0-old) >= ui->pitch_roll_sesitivity_spinBox->value()){
+		new_val = old+ui->pitch_roll_sesitivity_spinBox->value();
+		}
+	}
+	ui->label_roll_control->setText(QString::number(new_val));
+
+	int x = ui->label_circle_blue->geometry().x();
+	int y = ui->label_circle_blue->geometry().y();
+	QSize size = ui->label_circle_blue->geometry().size();
+
+	int new_x = 68+ui->label_roll_control->text().toInt();
+
+	ui->label_circle_blue->setGeometry(new_x,y, size.width(), size.height());
+}
+
+void MainWindow::pitch_up(){
+	int old= ui->label_pitch_control->text().toInt();
+	int new_val = old-ui->pitch_roll_sesitivity_spinBox->value();
+	if(new_val<-100) new_val=-100;
+	ui->label_pitch_control->setText(QString::number(new_val));
+	int x = ui->label_circle_blue->geometry().x();
+	int y = ui->label_circle_blue->geometry().y();
+	QSize size = ui->label_circle_blue->geometry().size();
+
+	int new_y = 68+ui->label_pitch_control->text().toInt();
+
+	ui->label_circle_blue->setGeometry(x,new_y, size.width(), size.height());
+}
+void MainWindow::pitch_down(){
+	int old= ui->label_pitch_control->text().toInt();
+	int new_val = old+ui->pitch_roll_sesitivity_spinBox->value();
+	if(new_val>100) new_val=100;
+	ui->label_pitch_control->setText(QString::number(new_val));
+
+	int x = ui->label_circle_blue->geometry().x();
+	int y = ui->label_circle_blue->geometry().y();
+	QSize size = ui->label_circle_blue->geometry().size();
+
+	int new_y = 68+ui->label_pitch_control->text().toInt();
+
+	ui->label_circle_blue->setGeometry(x,new_y, size.width(), size.height());
+}
+void MainWindow::pitch_center(){
+	int old= ui->label_pitch_control->text().toInt();
+	int new_val=0;
+	if(old>0){
+		if (old >= ui->pitch_roll_sesitivity_spinBox->value()){
+			new_val = old-ui->pitch_roll_sesitivity_spinBox->value();
+		}
+	}
+	else if(old<0){
+		if ((0-old) >= ui->pitch_roll_sesitivity_spinBox->value()){
+		new_val = old+ui->pitch_roll_sesitivity_spinBox->value();
+		}
+	}
+	ui->label_pitch_control->setText(QString::number(new_val));
+
+
+	int x = ui->label_circle_blue->geometry().x();
+	int y = ui->label_circle_blue->geometry().y();
+	QSize size = ui->label_circle_blue->geometry().size();
+
+	int new_y = 68+ui->label_pitch_control->text().toInt();
+
+	ui->label_circle_blue->setGeometry(x,new_y, size.width(), size.height());
+}
 
 void MainWindow::on_throttleSlider_valueChanged(int value)
 {
